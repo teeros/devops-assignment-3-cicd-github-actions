@@ -99,11 +99,16 @@ validate  →  test  →  docker
 
 To prove the pipeline actually enforces these checks, a dedicated branch
 (`ci-failure-demo`) was pushed with a deliberately broken script (a Bash
-syntax error), which failed the **validate** job. The syntax error was
-then fixed and pushed again on the same branch, after which the full
-`validate → test → docker` pipeline passed. See the repository's **Actions**
-tab / `gh run list` for both runs, and the pull request opened from
-`ci-failure-demo` for the before/after commits.
+syntax error), which failed the **validate** job — and correctly skipped
+the **test** and **docker** jobs, since both depend on `validate` via
+`needs:`. The syntax error was then fixed and pushed again on the same
+branch, after which the full `validate → test → docker` pipeline passed.
+The branch was opened as [PR #1](../../pull/1) (both the `push` and
+`pull_request` triggers were exercised) and merged into `main`.
+
+- Failing run (syntax error): [`36042790922`](../../actions/runs/36042790922)
+- Fixed/passing run: [`36042851882`](../../actions/runs/36042851882)
+- `pull_request`-triggered run on PR #1: [`36042946748`](../../actions/runs/36042946748)
 
 ## Testing (local grader)
 
