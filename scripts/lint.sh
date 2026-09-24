@@ -43,6 +43,3 @@ fi
 echo
 echo "Passed: $PASS  Failed: $FAIL"
 [[ $FAIL -eq 0 ]]
-
-# Intentionally broken line to demonstrate CI failure (unclosed if)
-if [[ "$FAIL" -gt 0 ]
