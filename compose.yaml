@@ -1,0 +1,7 @@
+services:
+  devops-tool:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: devops-tool:local
+    command: ["help"]
